@@ -112,7 +112,6 @@ public class ChessMatch {
 		} else {
 			enPassantVulnerable = null;
 		}
-
 		return (ChessPiece) capturedPiece;
 	}
 	
@@ -131,7 +130,7 @@ public class ChessMatch {
 		ChessPiece newPiece = newPiece(type, promoted.getColor());
 		board.placePiece(newPiece, pos);
 		piecesOnTheBoard.add(newPiece);
-		
+
 		return newPiece;
 	}
 	
@@ -143,7 +142,6 @@ public class ChessMatch {
 		if (type.equals("Q")) 
 			return new Queen(board, color);
 		return new Rook(board, color);
-
 	}
 
 	private Piece makeMove(Position source, Position target) {
@@ -156,6 +154,7 @@ public class ChessMatch {
 			piecesOnTheBoard.remove(capturedPiece);
 			capturedPieces.add(capturedPiece);
 		}
+		
 		// castling kingside
 		if (p instanceof King && target.getColumn() == source.getColumn() + 2) {
 			Position sourceRook = new Position(source.getRow(), source.getColumn() + 3);
@@ -164,6 +163,7 @@ public class ChessMatch {
 			board.placePiece(rook, targetRook);
 			rook.increaseMoveCount();
 		}
+		
 		// castling queenside
 		if (p instanceof King && target.getColumn() == source.getColumn() - 2) {
 			Position sourceRook = new Position(source.getRow(), source.getColumn() - 4);
@@ -172,6 +172,7 @@ public class ChessMatch {
 			board.placePiece(rook, targetRook);
 			rook.increaseMoveCount();
 		}
+		
 		// en passant
 		if (p instanceof Pawn) {
 			if (source.getColumn() != target.getColumn() && capturedPiece == null) {
@@ -199,6 +200,7 @@ public class ChessMatch {
 			capturedPieces.remove(capturedPiece);
 			piecesOnTheBoard.add(capturedPiece);
 		}
+		
 		// castling kingside
 		if (p instanceof King && target.getColumn() == source.getColumn() + 2) {
 			Position sourceRook = new Position(source.getRow(), source.getColumn() + 3);
@@ -207,6 +209,7 @@ public class ChessMatch {
 			board.placePiece(rook, sourceRook);
 			rook.decreaseMoveCount();
 		}
+		
 		// castling queenside
 		if (p instanceof King && target.getColumn() == source.getColumn() - 2) {
 			Position sourceRook = new Position(source.getRow(), source.getColumn() - 4);
@@ -215,6 +218,7 @@ public class ChessMatch {
 			board.placePiece(rook, sourceRook);
 			rook.decreaseMoveCount();
 		}
+		
 		// en passant
 		if (p instanceof Pawn) {
 			if (source.getColumn() != target.getColumn() && capturedPiece == enPassantVulnerable) {
